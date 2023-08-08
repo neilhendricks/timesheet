@@ -1,0 +1,364 @@
+.app {
+  background-color: black;
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+  overflow: hidden;
+  text-overflow: "clip"
+}
+body{
+  overflow: hidden;
+  text-overflow: "clip"
+}
+span{
+  text-overflow: "clip"
+
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 3px;
+}
+
+.title {
+ /* text-shadow: 0px 0px 2px #38cac2; */
+  color: #38cac2;
+  letter-spacing: 2px;
+}
+
+.logo {
+  height: 10vh;
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 250px;
+}
+
+.nav-button {
+  background-color: #38cac2;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+  padding: 10px 20px;
+ 
+  box-shadow: 0 0 5px #38cac2, 0 0 25px #38cac2 ;
+}
+
+.nav-button.selected {
+  background-color: white;
+  color: #38cac2;
+}
+
+.nav-button:hover {
+  /* Add popping out effect */
+}
+
+/* ClientSelect.css */
+.client-select {
+  color: white;
+  text-align: left;
+  margin: 30px;
+  /* margin-left: 65px; */
+  margin-top: 20px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.client-select select {
+  font-size: 1.5em;
+  width: 350px;
+  border-color: #38cac2;
+  /* border-width: 2px; */
+  /* color: #20837e; */
+  box-shadow: 0 0 5px #38cac2, 0 0 25px #38cac2 ;
+  height: 40px;
+  border-radius: 5px;
+  /* margin-top: 3px; */
+}
+
+.client-select label {
+  /* display: block;  */
+  margin-bottom: 4px; 
+}
+
+option{
+  color: #38cac2;
+}
+
+/*Project Select*/
+.project-select {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.project-select select {
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 1px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 200px;
+  height: 40px;
+  box-shadow: 0 0 5px #38cac2, 0 0 25px #38cac2 ;
+  font-size: 1.3em;
+}
+
+/*Date Picker*/
+.date-picker{
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  margin-top: 7px;
+  z-index: 100;
+}
+
+.date-picker label{
+  color: white;
+  margin-bottom: 10px;
+}
+
+.react-datepicker__input-container input {
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  text-align: center;
+  box-shadow: 0 0 5px #38cac2, 0 0 25px #38cac2 ;
+}
+
+.client-date-container {
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  /* align-items: center; */
+  /*justify-content: space-between;*/
+}
+/* .date-select-calendar {
+  z-index: 1000; 
+} */
+
+
+/* HoursAndBillable.css */
+
+.hours-billable-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 60px;
+  /* margin-bottom: 20px; */
+ height: 85px;
+}
+
+.hours-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.billable-checkbox {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  /* margin-bottom: 15px; */
+  /* margin-top: 10px; */
+  /*background-color: #38cac2; */
+}
+
+.hours-input label {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.billable-checkbox label {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.hours-input input {
+  width: 40px;
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+  /* padding: 5px; */
+  margin-right: 20px;
+  margin-left: 20px;
+  box-shadow: 0 0 10px #38cac2, 0 0 10px #38cac2 ;
+}
+
+.billable-checkbox input {
+  width: 20px;
+  height: 20px;
+  background-color: #38cac2;
+  margin-left:12px
+}
+
+
+.referenceNumberContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 70px;
+  margin-bottom: 10px;
+}
+.referenceNumberContainer input{
+  width: 150px;
+  height: 30px;
+}
+.referenceNumberContainer label{
+  margin-bottom: 10px;
+}
+
+/* Status.css 
+.status-container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+ 
+  margin: 40px;
+  margin-left: 90px;
+}
+
+.radio-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.radio-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.radio-button-container input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  
+}
+
+.radio-button-container input[type="radio"]:checked{
+ 
+  box-shadow: 0px 0px 3px 3px #38cac2;
+  box-shadow: 0 0 5px #38cac2, 0 0 25px #38cac2 ;
+  color: #38cac2;
+}
+
+.radio-button-container label {
+  margin-top: 5px;
+} */
+
+
+/* Description.css */
+.description-expenses-container{
+  display: flex;
+  justify-content: center;
+  gap: 5%;
+ overflow: hidden;
+ z-index: 0;
+}
+
+.description-container {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  overflow: hidden;
+}
+
+.description-container label {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.description-container textarea {
+  width: 450px;
+  height: 250px;
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.button-container {
+  margin-top: 5px;
+  display: flex;
+  /* flex-direction: column; */
+  width: 200px;
+}
+
+.add-button, .clear-button {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.add-button {
+  background-color: #38cac2;
+}
+
+.clear-button {
+  background-color: #f44336;
+}
+
+.grid-container{
+  /* width: 900px; */
+  position: relative;
+  left: -30px;
+  overflow: hidden;
+}
+
+.hours-column{
+  background-color: #38cac2;
+}
+
+/* .ig-data-grid{
+  background-color: green;
+  color: #38cac2;
+}
+
+.grid-container span{
+  overflow: hidden;
+} 
+MUST USE CSS CUSTOM PROPERTIES BY --
+elipses is reserved in header, there have been many people asking
+if you use igr template header, it will blank out everything with header
+React grid is very light weight, if you inspect dom on header, all of headers are basically just div with span inside
+but there is no class applied to them, they're all dynamically applied
+igr-grid-column-options are exposed, pop-up, placement of pop up, must be built manually
+all modern things are node based others physical assemblies or newget (wpf on.net would be physical assemblies. .NetCore5 or6 is supported by newget
+hq in New Jersey (24 hour phone support)
+*/
+
+/* .igr-data-grid{
+--cell-background: red;
+} */
+
+.igr-data-grid{
+  --header-row-separator-background: red;
+}
+
+.igr-data-grid{
+  display: inline;
+  --header-text-style: 10px;
+}
