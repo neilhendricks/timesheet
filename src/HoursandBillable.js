@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css"
 
-const HoursandBillable = ({hours, setHours, isBillable, setIsBillable}) => {
+const HoursandBillable = ({hours, setHours, isBillable, setIsBillable, showHours = true, showBillable = true}) => {
     // const [hours, setHours] = useState("")
     // const [isBillable, setIsBillable] = useState(false);
 
@@ -15,14 +15,17 @@ const HoursandBillable = ({hours, setHours, isBillable, setIsBillable}) => {
 
     return(
         <div className="hours-billable-container">
+           {showHours &&(
             <div className="hours-input">
                 <label>Hours</label>
-                <input type="number" min="0"  value={hours} onChange={handleHoursChange} />
-            </div>
+                <input type="number" min="0.25"  value={hours} onChange={handleHoursChange} />
+            </div> )}
+
+            {showBillable &&(
             <div className="billable-checkbox">
                 <label>Billable</label>
                 <input type="checkbox" checked={isBillable} onChange={handleBillableChange} />
-            </div>
+            </div> )}
         </div>
     )
 }

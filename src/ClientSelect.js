@@ -27,7 +27,7 @@ const ClientSelect = ({selectedClient, setSelectedClient, setSelectedClientId}) 
     <div className="client-select">
       <label>Client</label>
       <select value={selectedClient} onChange={handleClientChange}>
-        <option value="">Select client</option>
+        <option value="">Select Client</option>
         {clients.map(client => (
           <option key={client.client_id} value={client.ClientName}>
             {client.ClientName}

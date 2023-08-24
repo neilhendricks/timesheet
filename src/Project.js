@@ -1,19 +1,9 @@
 import {useEffect, useState} from "react"
 import "./App.css"
 
-const ProjectSelect = ({selectedProject, setSelectedProject, selectedClientId}) => {
+const ProjectSelect = ({selectedProject, setSelectedProject, selectedClientId, selectedProjectId}) => {
     const [projectList, setProjectList] = useState([]);
-
-// useEffect(()=>{
-//     if(selectedClientId) {
-//     fetch(`http://localhost/3001/api/projects/${selectedClientId}`)
-//     .then(response=>response.json)
-//     .then(data=>setProjectList(data.map(item=>item.ProjectName)))
-//     }
-//     else{
-//         setProjectList([])
-//     }
-// }, [selectedClientId])
+    
 useEffect(()=>{
    
     if(selectedClientId) {
@@ -21,8 +11,8 @@ useEffect(()=>{
       fetch(`http://localhost:3001/api/projects/${selectedClientId}`)
         .then(response=>response.json())
         .then(data=> {
-          
-          setProjectList(data.map(item=>item.ProjectName))
+          console.log("Fetched Projects:", data);
+          setProjectList(data)
         })
         .catch(error => console.error("Error:", error));
     }
@@ -32,22 +22,30 @@ useEffect(()=>{
   }, [selectedClientId]);
 
 const handleProjectChange = (event) => {
-    setSelectedProject(event.target.value)
+  console.log("ProjectSelect: Current selectedProject:", selectedProject);
+  console.log("Project selected:", event.target.value);
+  const projectId = event.target.value
+  const project = projectList.find(p=>p.project_id ===parseInt(projectId))
+    //setSelectedProject(event.target.value)
+    if (project) {
+      console.log("handleChange ifstatement:",project)
+      setSelectedProject({ projectId: project.project_id, projectName: project.ProjectName });
+  } else {
+    setSelectedProject({projectId: "", projectName: ""});
+  }
+  
 }
 
 return (
     <div className="project-select">
         <label>Project</label>
-        <select value={selectedProject} onChange={handleProjectChange}>
+        <select key={selectedClientId} value={selectedProject.projectId || ""} onChange={handleProjectChange}>
             <option value="">Select Project</option>
             {projectList.map(item =>(
-                <option key={item} value={item}>
-                    {item}
+                <option key={item.project_id} value={item.project_id}>
+                    {item.ProjectName}
                 </option>
             ))}
-            {/* <option value="project1">RET</option>
-            <option value="project2">KML Integration</option>
-             <option value="project3">newsday</option> */}
       </select>
     </div>
 )
