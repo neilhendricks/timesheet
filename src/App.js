@@ -10,7 +10,7 @@ import ReferenceNumber from './RefNumber';
 import Status from './Status';
 import Description from './Description';
 import ProjectSelect from './Project';
-import { IgrDataChart } from 'igniteui-react-charts';
+import { IgrDataChart, SquarifiedCalculator } from 'igniteui-react-charts';
 import { IgrCategoryXAxis } from 'igniteui-react-charts';
 import { IgrNumericYAxis } from 'igniteui-react-charts';
 import { IgrColumnSeries } from 'igniteui-react-charts';
@@ -18,7 +18,7 @@ import {IgrDataGridModule} from "igniteui-react-grids";
 import {IgrDataGrid} from "igniteui-react-grids";
 import { IgrTextColumn} from "igniteui-react-grids";
 import { registerDefaultTheme, ThemeManager } from 'igniteui-react-core';
-
+import { IgrGridSelectedItemsCollection } from 'igniteui-react-grids';
 //Initialize modules that support data grid
 IgrDataGridModule.register();
 
@@ -64,27 +64,28 @@ const App = () => {
     }
   }
 
-  const getClientAndProjectFromRefNo = async (refNumber)=> {
-      try{
-        const response = await fetch(`http://localhost:3001/api/ClientProject?refNumber=${refNumber}`)
-        //const {client, project} = await response.json();
-        const responseData = await response.json();
-        console.log("Server Response:", responseData);
-const { ClientName:client, ProjectName:projectName, client_id, project_id } = responseData[0] || {};
-// setSelectedClient(ClientName);
-// setSelectedProject(ProjectName);
-        setSelectedClient(client)
-        setSelectedClientId(client_id)
-        console.log("setSelected Project:", project_id)
-        setSelectedProject({ projectId: project_id, projectName: projectName })
-        console.log("App: Updated selectedProject:", { projectId: project_id, projectName: projectName });
-        console.log("Received client_id:", client_id);
-        
-        console.log("Received client and project:", client, projectName);
-      }
-      catch(err){
-        console.log("error", err)
-      }
+
+  //Reference Number functionality
+  const getClientAndProjectFromRefNo = async (refNumber) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/ClientProject?refNumber=${refNumber}`)
+
+      const responseData = await response.json();
+      console.log("Server Response:", responseData);
+      const { ClientName: client, ProjectName: projectName, client_id, project_id } = responseData[0] || {};
+
+      setSelectedClient(client)
+      setSelectedClientId(client_id)
+      console.log("setSelected Project:", project_id)
+      setSelectedProject({ projectId: project_id, projectName: projectName })
+      console.log("App: Updated selectedProject:", { projectId: project_id, projectName: projectName });
+      console.log("Received client_id:", client_id);
+
+      console.log("Received client and project:", client, projectName);
+    }
+    catch (err) {
+      console.log("error", err)
+    }
   }
 
 
@@ -148,8 +149,53 @@ useEffect(()=>{
     }
     return value;
 }
- 
 
+
+//Selecting a Infragistics Grid row to update or delte
+const [selectedItemsCollection, setSelectedItemsCollection] = useState(new IgrGridSelectedItemsCollection());
+ const onGridRowSelected = async (selection, event)=>{
+  console.log("Row selected:", event);
+  console.log("currentItems:", event.currentItems);
+
+  //line below caused error when a second row in the infragistics grid was clicked
+//console.log("Item at index 0:", event.currentItems._inner._inner[0].timesheet_id);
+
+      const selectedItem = event.currentItems._inner._inner[0];
+      
+      if(selectedItem && selectedItem.timesheet_id) {
+        console.log("Selected timesheet ID:", selectedItem.timesheet_id);
+        
+          if(!selectedItemsCollection.contains(selectedItem))
+            {const newSelectedItemsCollection = new IgrGridSelectedItemsCollection();
+            newSelectedItemsCollection.add(selectedItem);
+            setSelectedItemsCollection(newSelectedItemsCollection)}
+       
+        try{
+          console.log("Trying to make the API call");
+          const response = await fetch(`http://localhost:3001/api/timesheet/${selectedItem.timesheet_id}`)
+          if (!response.ok) {
+            throw new Error('Failed to fetch data from API.');
+        }
+          const responseData = await response.json()
+          console.log("On row click responseData:", responseData)
+
+          if (responseData && responseData.length > 0) 
+          
+            {const { ClientName, client_id, ProjectName:projectName, Date:recievedDate, Hours, Billable, Description, project_id} = responseData[0]
+            setDate(new Date(recievedDate));
+            setSelectedClient(ClientName);
+            setSelectedClientId(client_id)
+            setSelectedProject({projectId: project_id, projectName: projectName});
+            setHours(Hours);
+            setIsBillable(Billable);
+            setDescription(Description);}
+        }
+        catch(err){
+          console.error("Failed to get selected row info", err)
+        }
+      }
+ }
+console.log("Grid data: ", gridData)
 
   return (
     <div className="app">
@@ -191,6 +237,10 @@ useEffect(()=>{
               rowHeight="20"
               autoGenerateColumns={false}
               dataSource={gridData}
+              primaryKey="timesheet_id"
+              selectedItemsChanged={onGridRowSelected}
+              selectionMode="SingleRow"
+              selectedItems={selectedItemsCollection}
               // cellBackground=''
               // headerBackground='#38cac2'
               // cellBackground='#38cac2'
