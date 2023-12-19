@@ -1,0 +1,81 @@
+.details-container {
+    padding: 20px;
+  }
+  
+  .details-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .details-columns-container {
+    display: flex;
+    justify-content: center; /* Space out the columns */
+    gap: 150px;
+  }
+  
+  .details-column {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    align-items: end;
+  }
+  
+  .filter {
+    margin-bottom: 10px; /* Spacing between filters */
+  }
+  
+  .filter label {
+    margin-bottom: 5px; /* Spacing below labels */
+  }
+  
+  .filter input, 
+  .filter select {
+    padding: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .checkbox-container label {
+    display: block; /* Makes the checkbox appear on a new line */
+    margin-top: 5px; /* Spacing above checkbox */
+  }
+  
+  .checkbox-bottom {
+    margin-top: 20px; /* Spacing for bottom checkbox */
+    align-items: center;
+  }
+  
+  .data-grid-placeholder {
+    height: 500px; /* Placeholder for data grid */
+    border: 1px solid #ccc;
+    margin-bottom: 20px; /* Spacing below the data grid placeholder */
+  }
+  
+  .form-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .form-buttons button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .results{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    
+  }
+
+  .results textarea{
+    height: 20px;
+  }
+
+  .results .filter{
+    display: flex;
+  }
+
+  .billable-hours-column{
+    display: flex;
+    flex-direction: column;
+  }

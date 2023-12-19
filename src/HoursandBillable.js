@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.css"
+import "./Time.css"
 
 const HoursandBillable = ({hours, setHours, isBillable, setIsBillable, showHours = true, showBillable = true}) => {
     // const [hours, setHours] = useState("")

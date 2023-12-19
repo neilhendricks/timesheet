@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import './Time.css';
 
 const ClientSelect = ({selectedClient, setSelectedClient, setSelectedClientId}) => {
   // const [selectedClient, setSelectedClient] = useState("Select client");

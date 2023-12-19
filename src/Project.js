@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react"
-import "./App.css"
+import "./Time.css"
 
 const ProjectSelect = ({selectedProject, setSelectedProject, selectedClientId, selectedProjectId}) => {
     const [projectList, setProjectList] = useState([]);
